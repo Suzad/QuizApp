@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { View, StyleSheet } from "react-native";
 import { Input, Button, Card } from "react-native-elements";
 import * as firebase from "firebase";
+import "firebase/firestore";
 import {
 	Zocial,
 	AntDesign,
@@ -52,10 +53,9 @@ const SignUpScreen = (props) => {
 							.then((userCreds) => {
 								userCreds.user.updateProfile({ displayName: name });
 								firebase
-									.database()
-									.ref()
-									.child("users/")
-									.child(userCreds.user.uid)
+									.firestore()
+									.collection("users")
+									.doc(userCreds.user.uid)
 									.set({
 										name: name,
 										email: email,
