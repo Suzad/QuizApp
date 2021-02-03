@@ -13,7 +13,7 @@ const SignInScreen = (props) => {
 		<AuthContext.Consumer>
 			{(auth) => (
 				<View style={styles.viewStyle}>
-					<Card.Title>Welcome to Quiz App!</Card.Title>
+					<Card.Title>Welcome to Quiz App!?</Card.Title>
 					<Card.Divider />
 					<Input
 						leftIcon={<Zocial name="email" size={24} color="black" />}
