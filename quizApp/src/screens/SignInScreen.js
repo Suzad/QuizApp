@@ -30,6 +30,7 @@ const SignInScreen = (props) => {
 							setPassword(currentInput);
 						}}
 					/>
+					<Card.Divider style={{ backgroundColor: "#92C7C7", height: 30 }} />
 					<Button
 						icon={<Octicons name="sign-in" size={24} color="black" />}
 						title="Sign In"
@@ -43,10 +44,11 @@ const SignInScreen = (props) => {
 									auth.setCurrentUser(userCreds.user);
 								})
 								.catch((error) => {
-									alert("here");
+									alert(error);
 								});
 						}}
 					/>
+					<Card.Divider style={{ backgroundColor: "#92C7C7", height: 15 }} />
 					<Button
 						icon={<Ionicons name="person-add" size={24} color="black" />}
 						title="New to Quiz App?"

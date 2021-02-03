@@ -42,6 +42,7 @@ const SignUpScreen = (props) => {
 					setPassword(currentInput);
 				}}
 			/>
+			<Card.Divider style={{ backgroundColor: "#92C7C7", height: 30 }} />
 			<Button
 				icon={<Ionicons name="person-add" size={24} color="black" />}
 				title="SignUp"
@@ -76,6 +77,7 @@ const SignUpScreen = (props) => {
 					}
 				}}
 			/>
+			<Card.Divider style={{ backgroundColor: "#92C7C7", height: 10 }} />
 			<Button
 				icon={<Octicons name="sign-in" size={24} color="black" />}
 				title="Already have an account?"
