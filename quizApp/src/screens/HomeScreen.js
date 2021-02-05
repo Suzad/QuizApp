@@ -12,22 +12,28 @@ const HomeScreen = (props) => {
 
 					<Text style={styles.textscreenStyle}>Use As Teacher</Text>
 
-					<TouchableOpacity onPress={function () {
-						props.navigation.navigate("Teacher Screen");
-					}}
+					<TouchableOpacity
+						onPress={function () {
+							props.navigation.navigate("Teacher Screen");
+						}}
 					>
-						<Image style={styles.imageStyle} source={require('./../../assets/teacherteaching.jpg')} />
-
-
+						<Image
+							style={styles.imageStyle}
+							source={require("./../../assets/teacherteaching.jpg")}
+						/>
 					</TouchableOpacity>
 
 					<Text style={styles.textscreenStyle}>Use As Student</Text>
 
-					<TouchableOpacity onPress={function () {
-						props.navigation.navigate("Student Screen");
-					}}
+					<TouchableOpacity
+						onPress={function () {
+							props.navigation.navigate("Student Screen");
+						}}
 					>
-						<Image style={styles.imageStyle} source={require('./../../assets/student.jpg')} />
+						<Image
+							style={styles.imageStyle}
+							source={require("./../../assets/student.jpg")}
+						/>
 					</TouchableOpacity>
 
 					<Button
@@ -46,36 +52,35 @@ const HomeScreen = (props) => {
 
 const styles = StyleSheet.create({
 	textStyle: {
-		color: 'white',
+		color: "white",
 		fontSize: 40,
-		alignSelf: 'center',
-		backgroundColor: '#66B2FF',
+		alignSelf: "center",
+		backgroundColor: "#66B2FF",
 		marginVertical: 5,
 		height: 60,
 		width: 400,
-		textAlign: 'center'
+		textAlign: "center",
 	},
 	textscreenStyle: {
-		color: 'white',
+		color: "white",
 		fontSize: 20,
-		alignSelf: 'center',
-		backgroundColor: '#66B2FF',
+		alignSelf: "center",
+		backgroundColor: "#66B2FF",
 		height: 30,
 		width: 300,
-		textAlign: 'center',
+		textAlign: "center",
 		marginVertical: 10,
 	},
 	imageStyle: {
-		alignSelf: 'center',
+		alignSelf: "center",
 		height: 200,
 		width: 250,
 		marginVertical: 10,
 	},
 
 	backgroundColor: {
-		color: '#66B2FF'
+		color: "#66B2FF",
 	},
-
 });
 
 export default HomeScreen;
