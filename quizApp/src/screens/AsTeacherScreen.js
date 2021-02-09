@@ -30,30 +30,6 @@ const AsTeacherScreen = () => {
 	};
 
 	const loadCourses = () => {
-		// <AuthContext.Consumer>
-		// 	{(auth) => {
-		// 		firebase
-		// 			.firestore()
-		// 			.collection("courses")
-		// 			.orderBy("createdAt", "desc")
-		// 			.get()
-		// 			.then((querySnapshot) => {
-		// 				let temp_courses = [];
-		// 				querySnapshot.forEach((doc) => {
-		// 					console.log(auth);
-		// 					// if (auth.currentUser.uid == doc.teacherUid) {
-		// 					temp_courses.push({
-		// 						course_name: doc.id,
-		// 					});
-		// 					// }
-		// 				});
-		// 				setCourseList(temp_courses);
-		// 			})
-		// 			.catch((error) => {
-		// 				alert(error);
-		// 			});
-		// 	}}
-		// </AuthContext.Consumer>;
 		firebase
 			.firestore()
 			.collection("courses")
@@ -62,9 +38,11 @@ const AsTeacherScreen = () => {
 			.then((querySnapshot) => {
 				let temp_courses = [];
 				querySnapshot.forEach((doc) => {
-					temp_courses.push({
-						course_name: doc.id,
-					});
+					if (firebase.auth().currentUser.uid == doc.data().teacherUid) {
+						temp_courses.push({
+							course_name: doc.id,
+						});
+					}
 				});
 				setCourseList(temp_courses);
 			})
@@ -138,9 +116,6 @@ const AsTeacherScreen = () => {
 								<Button
 									title="Submit"
 									onPress={function () {
-										// console.log(courseCode);
-										// console.log(courseName);
-										// console.log(coursePassword);
 										if (courseCode && courseName && coursePassword) {
 											firebase
 												.firestore()
@@ -157,10 +132,6 @@ const AsTeacherScreen = () => {
 												.then(() => {
 													alert("Course created successfully!");
 													toggleModalVisibility();
-													// console.log(courseCode);
-													// console.log(courseName);
-													// console.log(coursePassword);
-													// console.log(auth);
 												})
 												.catch((error) => {
 													alert(error);
