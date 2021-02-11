@@ -40,7 +40,7 @@ const HomeScreen = (props) => {
 						type="clear"
 						title="View Your Profile"
 						onPress={function () {
-							console.log("View Profile Pressed")
+							props.navigation.navigate("Profile Screen");
 						}}
 					/>
 
