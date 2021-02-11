@@ -37,13 +37,27 @@ const HomeScreen = (props) => {
 					</TouchableOpacity>
 
 					<Button
-						type="outline"
+						type="clear"
+						title="View Your Profile"
+						onPress={function () {
+							console.log("View Profile Pressed")
+						}}
+					/>
+
+					<Button
+						type="solid"
 						title="Log Out!"
 						onPress={function () {
 							auth.setIsLoggedIn(false);
 							auth.setCurrentUser({});
 						}}
 					/>
+
+
+					
+
+
+
 				</View>
 			)}
 		</AuthContext.Consumer>
@@ -73,8 +87,8 @@ const styles = StyleSheet.create({
 	},
 	imageStyle: {
 		alignSelf: "center",
-		height: 200,
-		width: 250,
+		height: 170,
+		width: 200,
 		marginVertical: 10,
 	},
 
@@ -85,7 +99,3 @@ const styles = StyleSheet.create({
 
 export default HomeScreen;
 
-/*textStyle: {
-	fontSize: 30,
-	color: "blue",
-},*/
