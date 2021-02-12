@@ -52,6 +52,50 @@ const AsStudentScreen = (props) => {
 			});
 	};
 
+	// const loadCourses = () => {
+	// 	firebase
+	// 		.firestore()
+	// 		.collection("student")
+	// 		// .orderBy("createdAt", "desc")
+	// 		.doc(firebase.auth().currentUser.uid)
+	// 		.collection("courseCode")
+	// 		.get()
+	// 		.then((querySnapshot) => {
+	// 			let temp_courses = [];
+	// 			querySnapshot.forEach((doc) => {
+	// 				if (
+	// 					firebase.auth().currentUser.uid ==
+	// 					firebase.firestore().collection("student").doc.id
+	// 				) {
+	// 					let ref = firebase
+	// 						.firestore()
+	// 						.collection("student")
+	// 						.doc(firebase.auth().currentUser.uid)
+	// 						.collection("courseCode")
+	// 						.get();
+	// 					snapshot.doc.map((doc) => {
+	// 						temp_courses.push({
+	// 							course: doc.data(),
+	// 						});
+	// 					});
+	// 				}
+	// 			});
+	// 			console.log(
+	// 				firebase
+	// 					.firestore()
+	// 					.collection("student")
+	// 					.doc(firebase.auth().currentUser.uid)
+	// 					.collection("courseCode")
+	// 					.doc("dXbbnLCm0XQFvK8jaa6H")
+	// 					.data()
+	// 			);
+	// 			setCourseList(temp_courses);
+	// 		})
+	// 		.catch((error) => {
+	// 			alert(error);
+	// 		});
+	// };
+
 	useEffect(() => {
 		loadCourses();
 	}, [courseList]);
@@ -127,7 +171,7 @@ const AsStudentScreen = (props) => {
 									}}
 								/>
 
-								<Button
+								{/* <Button
 									title="Submit"
 									onPress={function () {
 										// console.log(courseCode);
@@ -147,7 +191,7 @@ const AsStudentScreen = (props) => {
 																.collection("student")
 																.doc(firebase.auth().currentUser.uid)
 																.collection("courseCode")
-																.doc(courseCode);
+																.add({ courseCode });
 															// .set({
 															// 	// sid: firebase.auth().currentUser.uid,
 															// 	courseCode,
@@ -171,9 +215,9 @@ const AsStudentScreen = (props) => {
 											});
 										}
 									}}
-								/>
+								/> */}
 
-								{/* <Button
+								<Button
 									title="Submit"
 									onPress={function () {
 										// console.log(courseCode);
@@ -215,7 +259,7 @@ const AsStudentScreen = (props) => {
 											});
 										}
 									}}
-								/> */}
+								/>
 
 								<Button
 									title="close"
