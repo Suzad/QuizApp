@@ -39,9 +39,9 @@ const AsStudentScreen = (props) => {
 			.then((querySnapshot) => {
 				let temp_courses = [];
 				querySnapshot.forEach((doc) => {
-					if (firebase.auth().currentUser.uid == doc.data().sid) {
+					if (firebase.auth().currentUser.uid == doc.id) {
 						temp_courses.push({
-							course: doc.data().courses,
+							course: doc.data().courseCode,
 						});
 					}
 				});
@@ -141,23 +141,26 @@ const AsStudentScreen = (props) => {
 													referencedCourse.onSnapshot((doc) => {
 														// console.log(doc.data());
 														if (doc.data().coursePassword == coursePassword) {
-															temp_courses.push(courseCode);
+															// temp_courses.push(courseCode);
 															firebase
 																.firestore()
 																.collection("student")
 																.doc(firebase.auth().currentUser.uid)
-																.set({
-																	sid: firebase.auth().currentUser.uid,
-																});
-															let ref = firebase
-																.firestore()
-																.collection("student")
-																.doc(firebase.auth().currentUser.uid);
-															ref.update({
-																courses: firebase.firestore.FieldValue.arrayUnion(
-																	courseCode
-																),
-															});
+																.collection("courseCode")
+																.doc(courseCode);
+															// .set({
+															// 	// sid: firebase.auth().currentUser.uid,
+															// 	courseCode,
+															// });
+															// 	let ref = firebase
+															// 		.firestore()
+															// 		.collection("student")
+															// 		.doc(firebase.auth().currentUser.uid);
+															// 	ref.update({
+															// 		courses: firebase.firestore.FieldValue.arrayUnion(
+															// 			courseCode
+															// 		),
+															// 	});
 															enrolledCourses.push(courseCode);
 															setCourseList(enrolledCourses);
 														}
@@ -169,6 +172,50 @@ const AsStudentScreen = (props) => {
 										}
 									}}
 								/>
+
+								{/* <Button
+									title="Submit"
+									onPress={function () {
+										// console.log(courseCode);
+										if (courseCode && coursePassword) {
+											const referencedCourse = firebase
+												.firestore()
+												.collection("courses")
+												.doc(courseCode);
+											referencedCourse.get().then((docSnapshot) => {
+												if (docSnapshot.exists) {
+													referencedCourse.onSnapshot((doc) => {
+														// console.log(doc.data());
+														if (doc.data().coursePassword == coursePassword) {
+															// temp_courses.push(courseCode);
+															firebase
+																.firestore()
+																.collection("student")
+																.doc(firebase.auth().currentUser.uid)
+																.set({
+																	// sid: firebase.auth().currentUser.uid,
+																	courseCode,
+																});
+															// 	let ref = firebase
+															// 		.firestore()
+															// 		.collection("student")
+															// 		.doc(firebase.auth().currentUser.uid);
+															// 	ref.update({
+															// 		courses: firebase.firestore.FieldValue.arrayUnion(
+															// 			courseCode
+															// 		),
+															// 	});
+															enrolledCourses.push(courseCode);
+															setCourseList(enrolledCourses);
+														}
+													});
+												} else {
+													alert("No such course exists!");
+												}
+											});
+										}
+									}}
+								/> */}
 
 								<Button
 									title="close"
