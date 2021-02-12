@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
 	StyleSheet,
 	View,
@@ -13,21 +13,48 @@ import {
 import * as firebase from "firebase";
 import "firebase/firestore";
 import { AuthContext } from "../providers/AuthProvider";
+import { FlatList } from "react-native-gesture-handler";
 
 const { width } = Dimensions.get("window");
 
 const AsStudentScreen = (props) => {
-	// const courseInfo = props.route.params;
-
 	const [isModalVisible, setModalVisible] = useState(false);
 	const [courseCode, setCourseCode] = useState("");
-	const [courseName, setCourseName] = useState("");
 	const [coursePassword, setCoursePassword] = useState("");
 	const [courseList, setCourseList] = useState([]);
 
 	const toggleModalVisibility = () => {
 		setModalVisible(!isModalVisible);
 	};
+
+	let enrolledCourses = [];
+	let temp_courses = [];
+
+	const loadCourses = () => {
+		firebase
+			.firestore()
+			.collection("student")
+			// .orderBy("createdAt", "desc")
+			.get()
+			.then((querySnapshot) => {
+				let temp_courses = [];
+				querySnapshot.forEach((doc) => {
+					if (firebase.auth().currentUser.uid == doc.data().sid) {
+						temp_courses.push({
+							course: doc.data().courses,
+						});
+					}
+				});
+				setCourseList(temp_courses);
+			})
+			.catch((error) => {
+				alert(error);
+			});
+	};
+
+	useEffect(() => {
+		loadCourses();
+	}, [courseList]);
 
 	return (
 		// <View>
@@ -46,19 +73,23 @@ const AsStudentScreen = (props) => {
 						<Text style={styles.headerText}> Enrolled Courses</Text>
 					</View>
 
-					{/* <ScrollView style={styles.scrollContainer}> */}
-					{/* <FlatList
+					<FlatList
 						data={courseList}
 						renderItem={({ item }) => {
 							console.log(item);
 							return (
 								<TouchableOpacity>
-									<Text style={styles.textscreenStyle}>{item.course_name}</Text>
+									<Text style={styles.textscreenStyle}>{item.course}</Text>
 								</TouchableOpacity>
 							);
 						}}
-					/> */}
-					{/* </ScrollView> */}
+					/>
+
+					{/* <FlatList> */}
+					{/* <TouchableOpacity>
+						<Text style={styles.textscreenStyle}>{courseList}</Text>
+					</TouchableOpacity> */}
+					{/* </FlatList> */}
 
 					<Modal
 						animationType="slide"
@@ -101,22 +132,40 @@ const AsStudentScreen = (props) => {
 									onPress={function () {
 										// console.log(courseCode);
 										if (courseCode && coursePassword) {
-											// console.log(courseCode);
-											const course = firebase
+											const referencedCourse = firebase
 												.firestore()
 												.collection("courses")
-												.doc(courseCode)
-												.get()
-												.then((doc) => {
-													console.log(doc);
-												});
-
-											// console.log(course);
-											// if (course.exists) {
-											// 	console.log(course);
-											// } else {
-											// 	alert("No Such course exists!");
-											// }
+												.doc(courseCode);
+											referencedCourse.get().then((docSnapshot) => {
+												if (docSnapshot.exists) {
+													referencedCourse.onSnapshot((doc) => {
+														// console.log(doc.data());
+														if (doc.data().coursePassword == coursePassword) {
+															temp_courses.push(courseCode);
+															firebase
+																.firestore()
+																.collection("student")
+																.doc(firebase.auth().currentUser.uid)
+																.set({
+																	sid: firebase.auth().currentUser.uid,
+																});
+															let ref = firebase
+																.firestore()
+																.collection("student")
+																.doc(firebase.auth().currentUser.uid);
+															ref.update({
+																courses: firebase.firestore.FieldValue.arrayUnion(
+																	courseCode
+																),
+															});
+															enrolledCourses.push(courseCode);
+															setCourseList(enrolledCourses);
+														}
+													});
+												} else {
+													alert("No such course exists!");
+												}
+											});
 										}
 									}}
 								/>

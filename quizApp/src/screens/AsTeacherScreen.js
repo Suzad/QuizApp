@@ -67,7 +67,7 @@ const AsTeacherScreen = () => {
 					<FlatList
 						data={courseList}
 						renderItem={({ item }) => {
-							console.log(item);
+							// console.log(item);
 							return (
 								<TouchableOpacity>
 									<Text style={styles.textscreenStyle}>{item.course_name}</Text>
