@@ -18,7 +18,7 @@ import { Card } from "react-native-elements";
 
 const { width } = Dimensions.get("window");
 
-const AsTeacherScreen = () => {
+const AsTeacherScreen = (props) => {
 	const [isModalVisible, setModalVisible] = useState(false);
 	const [courseCode, setCourseCode] = useState("");
 	const [courseName, setCourseName] = useState("");
@@ -69,7 +69,11 @@ const AsTeacherScreen = () => {
 						renderItem={({ item }) => {
 							// console.log(item);
 							return (
-								<TouchableOpacity>
+								<TouchableOpacity
+									onPress={function () {
+										props.navigation.navigate("Question Screen");
+									}}
+								>
 									<Text style={styles.textscreenStyle}>{item.course_name}</Text>
 								</TouchableOpacity>
 							);
