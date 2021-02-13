@@ -19,7 +19,6 @@ import { FlatList } from "react-native-gesture-handler";
 import QuestionCardTeacher from "../components/QuestionCardTeacher";
 import QuestionCard from "../components/QuestionCard";
 
-
 const { width } = Dimensions.get("window");
 
 const QuestionScreen = (props) => {
@@ -27,12 +26,9 @@ const QuestionScreen = (props) => {
 	const [courseCode, setCourseCode] = useState("");
 	const [queList, setQueList] = useState([]);
 
-
-	
-
 	const loadQue = () => {
 		// console.log(props.route.params.paramkey.item);
-		
+
 		firebase
 			.firestore()
 			.collection("question")
@@ -48,10 +44,8 @@ const QuestionScreen = (props) => {
 					}
 				});
 				setQueList(temp_courses);
-				
 			})
 			.catch((error) => {
-				
 				alert(error);
 			});
 	};
