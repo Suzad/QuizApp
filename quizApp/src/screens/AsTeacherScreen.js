@@ -72,7 +72,7 @@ const AsTeacherScreen = (props) => {
 							return (
 								<TouchableOpacity
 									onPress={function () {
-										props.navigation.navigate("Question Screen", {
+										props.navigation.navigate("Question Screen Teacher", {
 											paramkey: { item },
 										});
 									}}

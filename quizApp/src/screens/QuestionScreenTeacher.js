@@ -56,8 +56,7 @@ const QuestionScreen = (props) => {
 	return (
 		<ScrollView>
 			<Card>
-				{/* <Input
-					editable={false}
+				<Input
 					placeholder="Type your question "
 					leftIcon={<FontAwesome name="pencil" size={24} color="black" />}
 					onChangeText={(currentText) => {
@@ -90,13 +89,13 @@ const QuestionScreen = (props) => {
 					// 	alert("Field can not be empty!");
 					// }
 					//         }}
-				/> */}
+				/>
 
 				<FlatList
 					data={queList}
 					renderItem={function (item) {
 						// console.log(item);
-						return <QuestionCard body={item} />;
+						return <QuestionCardTeacher body={item} />;
 					}}
 				/>
 			</Card>
