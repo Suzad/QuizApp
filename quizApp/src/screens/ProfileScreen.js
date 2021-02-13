@@ -1,10 +1,16 @@
 import React from 'react';
 import {View,Text} from 'react-native';
+import HeaderComponent from "./../components/HeaderComponent"
 
-const ProfileScreen=()=>{
+const ProfileScreen=(props)=>{
     return(
         <View>
-            <Text>Profile Screen</Text>
+             <HeaderComponent
+                DrawerFunction={() => {
+                    props.navigation.toggleDrawer();
+                }}
+                
+            />
         </View>
     )
 }
