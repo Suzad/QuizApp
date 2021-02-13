@@ -102,6 +102,7 @@ const QuestionCard = (props) => {
 										que: props.body.item.que,
 										ans: answer,
 										ansBy: firebase.auth().currentUser.uid,
+										submissionTime: firebase.firestore.Timestamp.now(),
 									})
 									.then(() => {
 										alert("Answer submitted successfully!");

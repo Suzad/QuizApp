@@ -5,3 +5,7 @@ for react-native-elements:
   =>npm install react-native-elements
 for firebase:
   =>expo install firebase
+for tab navigator:
+  =>npm install @react-navigation/bottom-tabs
+for drawer navigator:
+  =>npm install @react-navigation/drawer
