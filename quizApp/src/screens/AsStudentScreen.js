@@ -61,7 +61,7 @@ const AsStudentScreen = (props) => {
 			.then((querySnapshot) => {
 				let temp_courses = [];
 				querySnapshot.forEach((doc) => {
-					console.log(doc.data());
+					// console.log(doc.data());
 					// if (firebase.auth().currentUser.uid == doc.id) {
 					temp_courses.push({
 						course: doc.data().course,
@@ -145,7 +145,13 @@ const AsStudentScreen = (props) => {
 						renderItem={({ item }) => {
 							// console.log(item);
 							return (
-								<TouchableOpacity>
+								<TouchableOpacity
+									onPress={function () {
+										props.navigation.navigate("Question Screen", {
+											paramkey: { item },
+										});
+									}}
+								>
 									<Text style={styles.textscreenStyle}>{item.course}</Text>
 								</TouchableOpacity>
 							);

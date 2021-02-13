@@ -16,6 +16,7 @@ import * as firebase from "firebase";
 import "firebase/firestore";
 import { AuthContext } from "../providers/AuthProvider";
 import { FlatList } from "react-native-gesture-handler";
+import QuestionCardTeacher from "../components/QuestionCardTeacher";
 import QuestionCard from "../components/QuestionCard";
 
 const { width } = Dimensions.get("window");
@@ -26,7 +27,7 @@ const QuestionScreen = (props) => {
 	const [queList, setQueList] = useState([]);
 
 	const loadQue = () => {
-		console.log(props.route.params.paramkey.item);
+		// console.log(props.route.params.paramkey.item);
 		firebase
 			.firestore()
 			.collection("question")
@@ -35,9 +36,7 @@ const QuestionScreen = (props) => {
 			.then((querySnapshot) => {
 				let temp_courses = [];
 				querySnapshot.forEach((doc) => {
-					if (
-						props.route.params.paramkey.item.course_name == doc.data().course
-					) {
+					if (props.route.params.paramkey.item.course == doc.data().course) {
 						temp_courses.push({
 							que: doc.data().que,
 						});
@@ -55,7 +54,7 @@ const QuestionScreen = (props) => {
 	}, [queList]);
 
 	return (
-		<View>
+		<ScrollView>
 			<Card>
 				<Input
 					placeholder="Type your question "
@@ -76,7 +75,7 @@ const QuestionScreen = (props) => {
 							.doc()
 							.set({
 								que: input,
-								course: props.route.params.paramkey.item.course_name,
+								course: props.route.params.paramkey.item.course,
 							})
 							.then(() => {
 								alert("Question created successfully!");
@@ -100,7 +99,7 @@ const QuestionScreen = (props) => {
 					}}
 				/>
 			</Card>
-		</View>
+		</ScrollView>
 	);
 };
 

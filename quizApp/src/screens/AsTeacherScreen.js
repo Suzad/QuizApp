@@ -40,7 +40,8 @@ const AsTeacherScreen = (props) => {
 				querySnapshot.forEach((doc) => {
 					if (firebase.auth().currentUser.uid == doc.data().teacherUid) {
 						temp_courses.push({
-							course_name: doc.id,
+							// course_name: doc.id,
+							course: doc.id,
 						});
 					}
 				});
@@ -76,7 +77,8 @@ const AsTeacherScreen = (props) => {
 										});
 									}}
 								>
-									<Text style={styles.textscreenStyle}>{item.course_name}</Text>
+									{/* <Text style={styles.textscreenStyle}>{item.course_name}</Text> */}
+									<Text style={styles.textscreenStyle}>{item.course}</Text>
 								</TouchableOpacity>
 							);
 						}}

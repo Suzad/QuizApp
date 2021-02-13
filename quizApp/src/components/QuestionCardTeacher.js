@@ -22,15 +22,13 @@ const { width } = Dimensions.get("window");
 const QuestionCard = (props) => {
 	const [isModalVisible, setModalVisible] = useState(false);
 	const [answer, setAnswer] = useState("");
-	const [score, setScore] = useState(0);
-	const [expectedAns, setExpectedAns] = useState("");
 
 	const toggleModalVisibility = () => {
 		setModalVisible(!isModalVisible);
 	};
 	return (
 		<View>
-			{/* <Text style={styles.textStyle}>Question Screen</Text> */}
+			<Text style={styles.textStyle}>Question Screen</Text>
 			<Card>
 				<View
 					style={{
@@ -97,11 +95,12 @@ const QuestionCard = (props) => {
 								// console.log("Modal pressed");
 								firebase
 									.firestore()
-									.collection("answers")
-									.add({
+									.collection("expected_answers")
+									.doc(props.body.item.que)
+									.set({
 										que: props.body.item.que,
-										ans: answer,
-										ansBy: firebase.auth().currentUser.uid,
+										expected_ans: answer,
+										teacher: firebase.auth().currentUser.uid,
 									})
 									.then(() => {
 										alert("Answer submitted successfully!");
@@ -110,13 +109,6 @@ const QuestionCard = (props) => {
 									.catch((error) => {
 										alert(error);
 									});
-								// setExpectedAns(
-								// 	firebase
-								// 		.firestore()
-								// 		.collection(expected_answers)
-								// 		.doc(props.body.item.que).expected_answers
-								// );
-								// console.log("expected answer:" + expectedAns);
 							}}
 						/>
 
