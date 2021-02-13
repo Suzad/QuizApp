@@ -27,23 +27,46 @@ const AsStudentScreen = (props) => {
 		setModalVisible(!isModalVisible);
 	};
 
-	let enrolledCourses = [];
-	let temp_courses = [];
+	// let enrolledCourses = [];
+	// let temp_courses = [];
+
+	// const loadCourses = () => {
+	// 	firebase
+	// 		.firestore()
+	// 		.collection("student")
+	// 		// .orderBy("createdAt", "desc")
+	// 		.get()
+	// 		.then((querySnapshot) => {
+	// 			let temp_courses = [];
+	// 			querySnapshot.forEach((doc) => {
+	// 				if (firebase.auth().currentUser.uid == doc.id) {
+	// 					temp_courses.push({
+	// 						course: doc.data().courseCode,
+	// 					});
+	// 				}
+	// 			});
+	// 			setCourseList(temp_courses);
+	// 		})
+	// 		.catch((error) => {
+	// 			alert(error);
+	// 		});
+	// };
 
 	const loadCourses = () => {
 		firebase
 			.firestore()
-			.collection("student")
+			.collection("student/" + firebase.auth().currentUser.uid + "/courses")
 			// .orderBy("createdAt", "desc")
 			.get()
 			.then((querySnapshot) => {
 				let temp_courses = [];
 				querySnapshot.forEach((doc) => {
-					if (firebase.auth().currentUser.uid == doc.id) {
-						temp_courses.push({
-							course: doc.data().courseCode,
-						});
-					}
+					console.log(doc.data());
+					// if (firebase.auth().currentUser.uid == doc.id) {
+					temp_courses.push({
+						course: doc.data().course,
+					});
+					// }
 				});
 				setCourseList(temp_courses);
 			})
@@ -120,7 +143,7 @@ const AsStudentScreen = (props) => {
 					<FlatList
 						data={courseList}
 						renderItem={({ item }) => {
-							console.log(item);
+							// console.log(item);
 							return (
 								<TouchableOpacity>
 									<Text style={styles.textscreenStyle}>{item.course}</Text>
@@ -171,7 +194,7 @@ const AsStudentScreen = (props) => {
 									}}
 								/>
 
-								{/* <Button
+								<Button
 									title="Submit"
 									onPress={function () {
 										// console.log(courseCode);
@@ -190,8 +213,8 @@ const AsStudentScreen = (props) => {
 																.firestore()
 																.collection("student")
 																.doc(firebase.auth().currentUser.uid)
-																.collection("courseCode")
-																.add({ courseCode });
+																.collection("courses")
+																.add({ course: courseCode });
 															// .set({
 															// 	// sid: firebase.auth().currentUser.uid,
 															// 	courseCode,
@@ -205,8 +228,8 @@ const AsStudentScreen = (props) => {
 															// 			courseCode
 															// 		),
 															// 	});
-															enrolledCourses.push(courseCode);
-															setCourseList(enrolledCourses);
+															// enrolledCourses.push(courseCode);
+															// setCourseList(enrolledCourses);
 														}
 													});
 												} else {
@@ -215,9 +238,9 @@ const AsStudentScreen = (props) => {
 											});
 										}
 									}}
-								/> */}
+								/>
 
-								<Button
+								{/* <Button
 									title="Submit"
 									onPress={function () {
 										// console.log(courseCode);
@@ -259,7 +282,7 @@ const AsStudentScreen = (props) => {
 											});
 										}
 									}}
-								/>
+								/> */}
 
 								<Button
 									title="close"

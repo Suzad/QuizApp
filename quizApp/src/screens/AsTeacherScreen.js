@@ -71,7 +71,9 @@ const AsTeacherScreen = (props) => {
 							return (
 								<TouchableOpacity
 									onPress={function () {
-										props.navigation.navigate("Question Screen");
+										props.navigation.navigate("Question Screen", {
+											paramkey: { item },
+										});
 									}}
 								>
 									<Text style={styles.textscreenStyle}>{item.course_name}</Text>
