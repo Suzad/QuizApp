@@ -8,6 +8,7 @@ const HomeScreen = (props) => {
 		<AuthContext.Consumer>
 			{(auth) => (
 				<View>
+					
 					<Text style={styles.textStyle}>Home Screen</Text>
 
 					<Text style={styles.textscreenStyle}>Use As Teacher</Text>
@@ -54,7 +55,7 @@ const HomeScreen = (props) => {
 					/>
 
 
-					
+
 
 
 
