@@ -24,6 +24,7 @@ const SignUpScreen = (props) => {
 	else {
 		return (
 			<View style={styles.viewStyle}>
+				<Card>
 				<Card.Title>Welcome to Quiz App</Card.Title>
 				<Card.Divider />
 				<Input
@@ -48,7 +49,7 @@ const SignUpScreen = (props) => {
 						setPassword(currentInput);
 					}}
 				/>
-				<Card.Divider style={{ backgroundColor: "#92C7C7", height: 30 }} />
+				<Card.Divider style={{ backgroundColor: "#fff", height: 30 }} />
 				<Button
 					icon={<Ionicons name="person-add" size={24} color="black" />}
 					title="SignUp"
@@ -87,7 +88,7 @@ const SignUpScreen = (props) => {
 						}
 					}}
 				/>
-				<Card.Divider style={{ backgroundColor: "#92C7C7", height: 10 }} />
+				<Card.Divider style={{ backgroundColor: "#fff", height: 10 }} />
 				<Button
 					icon={<Octicons name="sign-in" size={24} color="black" />}
 					title="Already have an account?"
@@ -95,6 +96,7 @@ const SignUpScreen = (props) => {
 						props.navigation.navigate("SignIn");
 					}}
 				/>
+				</Card>
 			</View>
 		);
 
@@ -107,7 +109,7 @@ const styles = StyleSheet.create({
 	viewStyle: {
 		flex: 1,
 		justifyContent: "center",
-		backgroundColor: "#92C7C7",
+		backgroundColor: "#66B2FF",
 	},
 });
 

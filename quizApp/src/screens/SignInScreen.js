@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { View, StyleSheet } from "react-native";
+import { View, StyleSheet,Image } from "react-native";
 import { Input, Button, Card } from "react-native-elements";
 import { Zocial, AntDesign, Octicons, Ionicons } from "@expo/vector-icons";
 import { AuthContext } from "../providers/AuthProvider";
@@ -18,6 +18,11 @@ const SignInScreen = (props) => {
 			<AuthContext.Consumer>
 				{(auth) => (
 					<View style={styles.viewStyle}>
+						<Image
+							style={styles.imageStyle}
+							source={require("./../../assets/quiz_icon.png")}
+						/>
+						<Card>
 						<Card.Title>Welcome to Quiz App!?</Card.Title>
 						<Card.Divider />
 						<Input
@@ -35,7 +40,7 @@ const SignInScreen = (props) => {
 								setPassword(currentInput);
 							}}
 						/>
-						<Card.Divider style={{ backgroundColor: "#92C7C7", height: 30 }} />
+						<Card.Divider style={{ backgroundColor: "#fff", height: 30 }} />
 						<Button
 							icon={<Octicons name="sign-in" size={24} color="black" />}
 							title="Sign In"
@@ -56,7 +61,7 @@ const SignInScreen = (props) => {
 									});
 							}}
 						/>
-						<Card.Divider style={{ backgroundColor: "#92C7C7", height: 15 }} />
+						<Card.Divider style={{ backgroundColor: "#fff", height: 15 }} />
 						<Button
 							icon={<Ionicons name="person-add" size={24} color="black" />}
 							title="New to Quiz App?"
@@ -64,7 +69,9 @@ const SignInScreen = (props) => {
 								props.navigation.navigate("SignUp");
 							}}
 						/>
+						</Card>
 					</View>
+			
 				)}
 			</AuthContext.Consumer>
 		);
@@ -78,7 +85,13 @@ const styles = StyleSheet.create({
 	viewStyle: {
 		flex: 1,
 		justifyContent: "center",
-		backgroundColor: "#92C7C7",
+		backgroundColor: "#66B2FF",
+	},
+	imageStyle: {
+		alignSelf: "center",
+		height: 200,
+		width: 200,
+		marginVertical: 10,
 	},
 });
 
